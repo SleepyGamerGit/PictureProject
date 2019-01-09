@@ -119,6 +119,19 @@ public class Picture extends SimplePicture
     } 
   }
   
+  public void mirrorHorizontal()
+  {
+	  Pixel [] [] pixels = this.getPixels2D();
+	  Pixel upPixel = null;
+	  Pixel downPixel = null;
+	  int height = pixels.length;
+	  
+	  for (int col = 0; row < pixels.length; row++)
+	  {
+		  for(int col = 0; cp; < width)
+	  }
+  }
+  
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -191,7 +204,8 @@ public class Picture extends SimplePicture
     this.write("collage.jpg");
   }
   
-  
+
+ 
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
     */
@@ -229,5 +243,13 @@ public class Picture extends SimplePicture
     beach.zeroBlue();
     beach.explore();
   }
+
+public void glitchy()
+{
+	Pixel[][] pixles = this.getPixels2D();
+	arch.explore();
+	arch.glitchy(); 
+	arch.explore();
+}
   
 } // this } is the end of class Picture, put all new methods before this

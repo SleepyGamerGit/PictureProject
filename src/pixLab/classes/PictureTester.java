@@ -36,6 +36,15 @@ public class PictureTester
     temple.explore();
   }
   
+  public static void testGlitchy()
+  {
+	  Picture glitched = new Picture("arch.jpg");
+	  glitched.explore();
+	  glitched.glitchy();
+	  glitched.explore();
+  }
+  
+  
   /** Method to test the collage method */
   public static void testCollage()
   {

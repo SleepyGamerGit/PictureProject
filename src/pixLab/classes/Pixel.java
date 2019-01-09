@@ -365,5 +365,5 @@ public class Pixel
       " green=" + getGreen() + 
       " blue=" + getBlue();
   }
-
+  
 }
