@@ -1,4 +1,7 @@
 package pixLab.classes;
+
+import java.awt.Color;
+
 /**
  * This class contains class (static) methods
  * that will help you test the Picture class 
@@ -9,6 +12,15 @@ package pixLab.classes;
  */
 public class PictureTester
 {
+	public static void testChromakey()
+	{
+		Picture source = new Picture("lonk.jpg");
+		Picture background = new Picture("kingdom.jpeg");
+		source.explore();
+		background.explore();
+		source.chromakey(background, Color.WHITE);
+		source.explore();
+	}
   /** Method to test zeroBlue */
   public static void testZeroBlue()
   {
@@ -84,7 +96,7 @@ public class PictureTester
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
-    //testChromakey();
+    testChromakey();
     //testEncodeAndDecode();
     //testGetCountRedOverValue(250);
     //testSetRedToHalfValueInTopHalf();
