@@ -21,6 +21,19 @@ public class PictureTester
 		source.chromakey(background, Color.WHITE);
 		source.explore();
 	}
+	
+	public static void testSteganography()
+	{
+		Picture source = new Picture("musk.jpg");
+		
+		Picture message = new Picture("dergan.jpg");
+		source.explore();
+		message.explore();
+		source.hidePicture(message);
+		source.explore();
+		source.revealPicture();
+		source.explore();
+	}
   /** Method to test zeroBlue */
   public static void testZeroBlue()
   {
@@ -48,6 +61,14 @@ public class PictureTester
     temple.explore();
   }
   
+  public static void testOnlyBlue()
+  {
+	  Picture hallow = new Picture("hallow.jpg");
+	  hallow.explore();
+	  hallow.onlyBlue();
+	  hallow.explore();
+  }
+  
   public static void testGlitchy()
   {
 	  Picture glitched = new Picture("arch.jpg");
@@ -55,7 +76,6 @@ public class PictureTester
 	  glitched.glitchy();
 	  glitched.explore();
   }
-  
   
   /** Method to test the collage method */
   public static void testCollage()
@@ -77,10 +97,13 @@ public class PictureTester
     * method in Java */
   public static void main(String[] args)
   {
-    // uncomment a call here to run a test
+	
+	testOnlyBlue();  
+	  // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
     testZeroBlue();
+    testSteganography();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();

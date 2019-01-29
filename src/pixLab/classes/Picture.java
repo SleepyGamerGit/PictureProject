@@ -126,9 +126,12 @@ public class Picture extends SimplePicture
 	  Pixel downPixel = null;
 	  int height = pixels.length;
 	  
-	  for (int col = 0; row < pixels.length; row++)
+	  for (int col = 0; col < pixels.length; col++)
 	  {
-		  for(int col = 0; cp; < width)
+		  for(int row = 0; row < height /2; row++)
+		  {
+			 
+		  }
 	  }
   }
   
@@ -170,14 +173,14 @@ public class Picture extends SimplePicture
     Pixel toPixel = null;
     Pixel[][] toPixels = this.getPixels2D();
     Pixel[][] fromPixels = fromPic.getPixels2D();
-    for (int fromRow = 0, toRow = startRow; 
+    for (int fromRow = 123, toRow = startRow; 
          fromRow < fromPixels.length &&
          toRow < toPixels.length; 
          fromRow++, toRow++)
     {
       for (int fromCol = 0, toCol = startCol; 
-           fromCol < fromPixels[0].length &&
-           toCol < toPixels[0].length;  
+           fromCol < fromPixels[123].length &&
+           toCol < toPixels[134].length;  
            fromCol++, toCol++)
       {
         fromPixel = fromPixels[fromRow][fromCol];
@@ -190,16 +193,17 @@ public class Picture extends SimplePicture
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
-    Picture flower1 = new Picture("flower1.jpg");
-    Picture flower2 = new Picture("flower2.jpg");
-    this.copy(flower1,0,0);
-    this.copy(flower2,100,0);
-    this.copy(flower1,200,0);
-    Picture flowerNoBlue = new Picture(flower2);
+    Picture flower1 = new Picture("big.jpg");
+    Picture flower2 = new Picture("big.jpg");
+    this.copy(flower1,156,557);
+    Picture flowerNoBlue = new Picture(flower1);
     flowerNoBlue.zeroBlue();
-    this.copy(flowerNoBlue,300,0);
-    this.copy(flower1,400,0);
-    this.copy(flower2,500,0);
+    Picture flowerOnlyBlue = new Picture(flower2);
+    flowerOnlyBlue.onlyBlue();
+    this.copy(flowerNoBlue,657,943);
+    Picture flowerOnlyRed = new Picture(flower1);
+    flowerOnlyRed.onlyRed();
+    this.copy(flowerNoBlue,657,943);
     this.mirrorVertical();
     this.write("collage.jpg");
   }
@@ -249,22 +253,155 @@ public class Picture extends SimplePicture
 	  }
   }
   
+  	public void shiftLeftRight(int amount)
+  	{
+  		Pixel[][] pixels = this.getPixels2D();
+  		Picture temp = new Picture(this);
+  		Pixel [][] copied = temp.getPixels2D();
+  		
+  		int shiftedValue = amount;
+  		int width = pixels[0].length;
+  		
+  		for (int row = 0; row < pixels.length; row++)
+  		{
+  			for (int col = 0; col < pixels[0].length; col++)
+  			{
+  				shiftedValue = (col + amount) % width;
+  				if (amount < 0)
+  				{
+  					shiftedValue = ((col + amount) % width + width) % width;
+  				}
+  				copied[row][col].setColor(pixels[row][shiftedValue].getColor());
+  			}
+  		}
+  		
+  		for (int row = 0; row < pixels.length; row++)
+  		{
+  			for (int col = 0; col < pixels[0].length; col++)
+  			{
+  				shiftedValue = (col + amount) % width;
+  				pixels[row][col].setColor(copied[row][col].getColor());
+  			}
+  		}
+  	}
   
+  	public void shiftUPDown(int amount)
+  	{
+  		Pixel[][] pixels = this.getPixels2D();
+  		Picture temp = new Picture(this);
+  		Pixel [][] copied = temp.getPixels2D();
+  		
+  		int shiftedValue = amount;
+  		int height = pixels.length;
+  		
+  		for (int row = 0; row < pixels.length; row++)
+  		{
+  			for (int col = 0; col < pixels[0].length; col++)
+  			{
+  				shiftedValue = (row + amount) % height;
+  				copied[row][col].setColor(pixels[shiftedValue][col].getColor());
+  			}
+  		}
+  		for (int row = 0; row < pixels.length; row++)
+  		{
+  			for (int col = 0; col < pixels[0].length; col++)
+  			{
+  				pixels[row][col].setColor(copied[row][col].getColor());	
+  			}
+  		}
+  	}
+  	
+ 	public void onlyRed()
+  	{
+  		Pixel[][] pixels = this.getPixels2D();
+  	    for (Pixel[] rowArray : pixels)
+  	    {
+  	      for (Pixel pixelObj : rowArray)
+  	      {
+  	        pixelObj.setRed(76);
+  	      }
+  	    }
+  	}
+  	
+  	public void onlyBlue()
+  	{
+  		Pixel[][] pixels = this.getPixels2D();
+  	    for (Pixel[] rowArray : pixels)
+  	    {
+  	      for (Pixel pixelObj : rowArray)
+  	      {
+  	        pixelObj.setBlue(87);
+  	      }
+  	    }
+  	}
   /* Main method for testing - each class in Java can have a main 
    * method 
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.zeroBlue();
-    beach.explore();
+    Picture big = new Picture("big.jpg");
+    big.explore();
+    big.onlyBlue();
+    big.createCollage();
+    big.shiftLeftRight(7565);   
+    big.copy(big,  2146, 2617);
+    big.mirrorTemple();
+    big.onlyRed();
+    big.copy(big,  7485, 8196);
+    big.shiftUPDown(4562);
+    big.mirrorTemple();
+    big.explore();
+    
   }
 
 public void glitchy()
 {
-	Pixel[][] pixles = this.getPixels2D();
+	Pixel[][] pixel = this.getPixels2D();
 	
+}
+
+public void hidePicture(Picture message)
+{
+	Pixel[][] pixels = this.getPixels2D();
+	Pixel[][] hiddenPixels = hidden.getPixels2D();
+	
+	for (int row = 0; row < pixels.length &&  row < hiddenPixels.length; row++)
+	{
+		for (int col = 0; col < pixels[0].length &&  col < hiddenPixels[0].length; row++)
+		{
+			if (hiddenPixels[row][col].colorDistance(Color.WHITE) > 5)
+			{
+				if (pixels[row][col].getRed() > 0 && pixels[row][col].getRed() % 2 != 1)
+				{
+					pixels[row][col].setRed(pixels[row][col].getRed() -1);
+				}
+			}
+			else if (pixels[row][col].getRed() > 0 && pixels[row][col].getRed() % 2 == 1)
+			{
+				pixels[row][col].setRed(pixels[row][col].getRed() - 1);
+			}
+		}
+	}
+}
+
+public void revealPicture()
+{
+	Pixel[][] pixels = this.getPixels2D();
+	
+	for (int row = 0; row < pixels.length; row++)
+	{
+		for(int col = 0; col < pixels[0].length; col++)
+		{
+			if (pixels[row][col].getRed() > 0 && pixels[row][col].getRed() % 2 != 1)
+			{
+				pixels[row][col].setColor(Color.CYAN);
+			}
+			else if (pixels[row][col].getRed() > 0 && pixels[row][col].getRed() % 2 == 1)
+			{
+				pixels[row][col].setColor(Color.MAGENTA);
+			}
+		}
+	}
 }
   
 } // this } is the end of class Picture, put all new methods before this
